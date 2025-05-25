@@ -1,1 +1,1 @@
-<h1>MyNvim-confif<h1>
+# MyNvim-config
