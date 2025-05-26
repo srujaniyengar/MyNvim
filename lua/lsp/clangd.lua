@@ -1,9 +1,13 @@
--- C/C++ language server configuration
-
 local lspconfig = require("lspconfig")
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-lspconfig.clangd.setup {
-  capabilities = require("lsp.cmp").capabilities,
-  on_attach = require("lsp.cmp").on_attach,
-  cmd = { "clangd", "--background-index" },
-}
+local capabilities = cmp_nvim_lsp.default_capabilities()
+
+local on_attach = function(client, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+end
+
+lspconfig.clangd.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})

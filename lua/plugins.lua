@@ -17,7 +17,7 @@ return {
       require("nvim-tree").setup {
         git = {
           enable = true,
-          ignore = false, -- show .gitignored files
+          ignore = false,
         },
         renderer = {
           highlight_git = true,
@@ -49,8 +49,23 @@ return {
     end,
   },
 
-  -- LSP
+  -- LSP Config
   { "neovim/nvim-lspconfig" },
+
+  -- Completion framework and sources
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "saadparwaiz1/cmp_luasnip",
+      "L3MON4D3/LuaSnip",
+    },
+    config = function()
+      require("lsp.cmp")
+    end,
+  },
 
   -- Terminal
   {

@@ -1,5 +1,18 @@
--- This file loads language servers for Go and C/C++ with autocompletion like VS Code
+local lspconfig = require("lspconfig")
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-require("lsp.gopls")
-require("lsp.clangd")
-require("lsp.cmp")
+local capabilities = cmp_nvim_lsp.default_capabilities()
+
+local on_attach = function(client, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+end
+
+lspconfig.clangd.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+lspconfig.gopls.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
